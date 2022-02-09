@@ -1,4 +1,4 @@
-Guessing game
+Guessing game by computer
 --------------
 
 // ask user if they want to play
@@ -13,20 +13,23 @@ if(play) {
 
     // for each difficulty
     switch (difficulty)
+        case very easy:
+            max = 10
+            tries = 11
+
         case easy:
-            max = xNum
-            tries = y
+            max = 10
+            tries = 5
 
         case medium:
-            max = xNum
-            tries = y
-
-        case hard:
-            max = xNum
-            tries = y
-        case extreme:
-            max = xNum
-            tries = y
+            max = 100
+            tries = 5
+        case difficult:
+            max = 500
+            tries = 8
+        case very difficult:
+            max = 1000
+            tries = 9
 
 
 
