@@ -1,0 +1,86 @@
+Guessing game
+--------------
+
+// ask user if they want to play
+input(play)
+
+
+// if they say yes than play
+if(play) {
+
+    // ask for the difficulty
+    input(difficulty)
+
+    // for each difficulty
+    switch (difficulty)
+        case easy:
+            max = xNum
+            tries = y
+
+        case medium:
+            max = xNum
+            tries = y
+
+        case hard:
+            max = xNum
+            tries = y
+        case extreme:
+            max = xNum
+            tries = y
+
+
+
+    
+    //computer Guessing
+    userChoice = input(choice)
+
+    //set the minimum
+    minimun = 0
+    // count the number of tries
+    count_tries = 0
+
+
+    // if computer have enough tries
+    if count_tries < tries {
+        // algorithm to find half of the numbers
+        num_guess = (max / 2) + minimun
+
+        if userChoice > num_guess {
+            // set the new minimum
+        }
+
+        if userChoice < num_guess {
+            // set the new maximum
+        }
+
+        // add tries until ran out or number is guessed
+        count_tries++
+
+    }
+
+    // if there is no tries left
+    if count_tries == tries {
+
+        play = !play
+        print('game over')
+    }
+
+    // if number is found within  the guess limit
+    if num_guess = userChoice {
+        print(number is = userChoice)
+        play = !play
+    }
+}
+
+
+// if user is not playing
+if !play {
+    print('want to play?')
+    if answer = no {
+        quit
+    }
+
+    if answer = yes {
+        play = true
+    }
+}
