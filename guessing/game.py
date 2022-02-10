@@ -1,4 +1,3 @@
-from itertools import count
 import random
 
 def play() :
@@ -9,7 +8,6 @@ def play() :
         min = 0
         diff = ''
 
-
         print('Choose your level of difficulty \n Very Easy - Unlimited Tries : 1 '
         '\n Easy - 5 tries              : 2'
         '\n Medium - 5 tries            : 3'
@@ -18,7 +16,7 @@ def play() :
 
         while True:
             try:
-                difficulty = input('Choose a valid Option') 
+                difficulty = input('Choose a valid Option ') 
                 if difficulty == '1':
                     diff = 'very easy'
                     max = 10
@@ -47,36 +45,35 @@ def play() :
             except ValueError:
                 print('Choose a valid option : ')
 
-
         compChoice = random.randint(min,max)
         print(compChoice)
-
         print(f'Difficulty set to {diff}, choose a number between {min} and {max}')
         print(f'You have {tries} tries left. Good luck!')
 
         while True:
             try :
-                userChoice = int(input(f'Choose a number between {min} and {max}. {tries} tries Left'))
+                userChoice = int(input(f'Choose a number between {min} and {max}. {tries} tries Left: '))
 
                 if userChoice > compChoice:
                     max = userChoice
                 elif userChoice < compChoice:
                     min = userChoice
+                elif userChoice == compChoice:
+                    print("Well played")
+                    playing = False
+                    break
                 
                 tries -= 1
 
-
             except ValueError:
-                print('Game Over')
-                playing = False
-                play()
-
+                print('Please write a valid option: ')
+ 
             if tries < 1 :
                     print('No luck')
+                    playing = False
                     break
         
         play()
-
 
     if not playing :
         print('Quitting game')
