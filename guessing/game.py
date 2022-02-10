@@ -46,7 +46,6 @@ def play() :
                 print('Choose a valid option : ')
 
         compChoice = random.randint(min,max)
-        print(compChoice)
         print(f'Difficulty set to {diff}, choose a number between {min} and {max}')
         print(f'You have {tries} tries left. Good luck!')
 
@@ -69,7 +68,7 @@ def play() :
                 print('Please write a valid option: ')
  
             if tries < 1 :
-                    print('No luck')
+                    print(f'No luck, the answer was {compChoice}!')
                     playing = False
                     break
         
