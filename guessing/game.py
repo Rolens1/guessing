@@ -66,14 +66,16 @@ def play() :
                 tries -= 1
 
 
-            except tries < 1:
+            except ValueError:
                 print('Game Over')
                 playing = False
                 play()
 
-            if tries < 0 :
+            if tries < 1 :
                     print('No luck')
                     break
+        
+        play()
 
 
     if not playing :
