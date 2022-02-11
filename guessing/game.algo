@@ -1,0 +1,81 @@
+CALL play
+
+SEQUENCE play
+    DISPLAY ("Do you want to play")
+    // READ ANSWER
+    IF ANSWER is YES
+        SET playing TO True
+        CALL get_difficulty WITH playing
+        CALL guessing WITH tries, max, random_number
+    IF ANSWER is NO
+        SET playing to False
+        DISPLAY ("See you Again")
+ENDSEQUENCE
+
+SEQUENCE get_difficulty USING playing
+    IF playing
+
+        SET min TO 0
+        SET tries to 0
+        SET user_guess TO null
+
+        DISPLAY ("Choose difficulty")
+        DISPLAY ("very easy, easy, medium, hard, very hard")
+        // READ choose_difficulty
+        
+        CASE choose_difficulty OF
+            very easy: 
+                        SET max TO 10
+                        SET tries to unlimited
+            easy:
+                        SET max to 10
+                        SET tries to 5
+            medium: 
+                        SET max TO 100
+                        SET tries to 5
+            hard:
+                        SET max to 500
+                        SET tries to 8
+            very hard:
+                        SET max to 1000
+                        SET tries to 9
+        ENDCASE
+
+
+        SET random_number TO random number between min and max
+ENDSEQUENCE
+
+
+SEQUENCE guessing USING tries, max, random_number
+
+    WHILE tries > 0 OR  user_guess NOT EQUAL TO random_number
+        DISPLAY ("Choose a number")
+        OBTAIN user_guess
+
+        IF user_guess > random_number
+            // SET max to user_guess
+            // SET tries to tries - 1
+            DISPLAY ("You have " + tries + " tries left")
+            DISPLAY ("Number between "+ min + " and "+ max)
+
+        IF user_guess < random_number
+            // SET min to user_guess
+            // SET tries to tries - 1
+            DISPLAY ("You have " + tries + " tries left")
+            DISPLAY ("Number between "+ min + " and "+ max)
+    ENDWHILE
+        
+    IF tries == 0 
+        DISPLAY ("You lost")
+        ENDSEQUENCE
+        CALL play
+
+    IF user_guess == random_number
+        DISPLAY ("You win")
+        CALL play
+ENDSEQUENCE
+
+
+        
+
+            
