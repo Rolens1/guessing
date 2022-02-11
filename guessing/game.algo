@@ -1,28 +1,44 @@
+// Start the game
 CALL play
 
+// Loop to start the game
 SEQUENCE play
+    // Ask the user if they want to play
     DISPLAY ("Do you want to play")
-    // READ ANSWER
+    READ ANSWER
+
+    // If they choose to play
     IF ANSWER is YES
         SET playing TO True
+        // User will choose difficulty while playing is active
         CALL get_difficulty WITH playing
-        CALL guessing WITH tries, max, random_number
+        // guessing function will start with the following params : tries, max and random_number
+        CALL guessing WITH tries AND max AND random_number
+    ENDIF
+    // If they don't want to play
     IF ANSWER is NO
         SET playing to False
         DISPLAY ("See you Again")
+        // QUIT
+    ENDIF
 ENDSEQUENCE
 
+// Setting the difficulty
 SEQUENCE get_difficulty USING playing
+    // verifify if playing is True
     IF playing
 
+        // Set the minimum, the tries and user_guess to default values
         SET min TO 0
         SET tries to 0
         SET user_guess TO null
 
+        // Get user to choose a difficulty
         DISPLAY ("Choose difficulty")
         DISPLAY ("very easy, easy, medium, hard, very hard")
-        // READ choose_difficulty
+        READ choose_difficulty
         
+        // For the chosen difficulty set the variable to the correct numbers
         CASE choose_difficulty OF
             very easy: 
                         SET max TO 10
@@ -41,41 +57,56 @@ SEQUENCE get_difficulty USING playing
                         SET tries to 9
         ENDCASE
 
-
+        // Set a random number from the computer in between the minimum and the maximum
         SET random_number TO random number between min and max
+
+        // return the needed values to play the game
+        RETURNS tries AND max AND random_number
+
 ENDSEQUENCE
 
-
+// function when the user is trying to guess the number
 SEQUENCE guessing USING tries, max, random_number
 
-    WHILE tries > 0 OR  user_guess NOT EQUAL TO random_number
+    // while the tries is bigger than 0 or the user guess is not the same as the random number do the loop
+    WHILE tries > 0 OR user_guess NOT EQUAL TO random_number
+        
+        // get a new user input each loop
         DISPLAY ("Choose a number")
         OBTAIN user_guess
 
+        // if the user guesses a number higher than the random number
         IF user_guess > random_number
-            // SET max to user_guess
-            // SET tries to tries - 1
-            DISPLAY ("You have " + tries + " tries left")
-            DISPLAY ("Number between "+ min + " and "+ max)
+            // set the maximum to the guess to indicate the number is smaller
+            SET max to user_guess
+        ENDIF
 
+        // if the user guess a number lower than the random number
         IF user_guess < random_number
-            // SET min to user_guess
-            // SET tries to tries - 1
-            DISPLAY ("You have " + tries + " tries left")
-            DISPLAY ("Number between "+ min + " and "+ max)
+            // set the minimum to the guess to indicate the number is bigger
+            SET min to user_guess
+        ENDIF
+
+        // reduce the number of tries on each loop
+        SET tries to tries - 1
+        // display the number of tries and hints to the user
+        DISPLAY ("You have " + tries + " tries left")
+        DISPLAY ("Number between "+ min + " and "+ max)
+
     ENDWHILE
         
+    // if the user don't have anymore tries
     IF tries == 0 
+        // display you lost and ask to play Again
         DISPLAY ("You lost")
-        ENDSEQUENCE
-        CALL play
+    ENDIF
 
+    // if the user guesses the right number
     IF user_guess == random_number
+        // display a winning message
         DISPLAY ("You win")
-        CALL play
+    ENDIF
+
+    // ask user if they want to play Again
+    Call play
 ENDSEQUENCE
-
-
-        
-
-            

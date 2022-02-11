@@ -74,7 +74,7 @@ def play() :
         
         play()
 
-    if not playing :
-        print('Quitting game')
+
 
 play()
+print('Quitting game')
